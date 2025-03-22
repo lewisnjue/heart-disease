@@ -2,3 +2,7 @@ ucimlrepo
 pandas 
 numpy
 scikit-learn
+matplotlib 
+seaborn 
+ucimlrepo 
+joblib
