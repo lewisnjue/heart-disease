@@ -1,5 +1,163 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>this is the main file test it out </h1>
-{% endblock  %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        background-color: #ffffff;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+        color: #333;
+    }
+
+    .form-group input:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    button {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    #prediction-result {
+        margin-top: 1.5rem;
+        padding: 1rem;
+        background-color: #e9ecef;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 1.1rem;
+        color: #333;
+    }
+
+    @media (max-width: 600px) {
+        .container {
+            padding: 1rem;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+        }
+
+        .form-group input {
+            padding: 0.5rem;
+        }
+
+        button {
+            padding: 0.5rem;
+        }
+    }
+</style>
+
+<div class="container">
+    <h1>Heart Disease Prediction</h1>
+    <form id="prediction-form" action="/predict" method="post">
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+        </div>
+        <div class="form-group">
+            <label for="sex">Sex (1 = Male, 0 = Female):</label>
+            <input type="number" id="sex" name="sex" required>
+        </div>
+        <div class="form-group">
+            <label for="cp">Chest Pain Type (1-4):</label>
+            <input type="number" id="cp" name="cp" required>
+        </div>
+        <div class="form-group">
+            <label for="trestbps">Resting Blood Pressure (mm Hg):</label>
+            <input type="number" id="trestbps" name="trestbps" required>
+        </div>
+        <div class="form-group">
+            <label for="chol">Serum Cholesterol (mg/dl):</label>
+            <input type="number" id="chol" name="chol" required>
+        </div>
+        <div class="form-group">
+            <label for="fbs">Fasting Blood Sugar > 120 mg/dl (1 = True, 0 = False):</label>
+            <input type="number" id="fbs" name="fbs" required>
+        </div>
+        <div class="form-group">
+            <label for="restecg">Resting Electrocardiographic Results (0-2):</label>
+            <input type="number" id="restecg" name="restecg" required>
+        </div>
+        <div class="form-group">
+            <label for="thalach">Maximum Heart Rate Achieved:</label>
+            <input type="number" id="thalach" name="thalach" required>
+        </div>
+        <div class="form-group">
+            <label for="exang">Exercise Induced Angina (1 = Yes, 0 = No):</label>
+            <input type="number" id="exang" name="exang" required>
+        </div>
+        <div class="form-group">
+            <label for="oldpeak">ST Depression Induced by Exercise Relative to Rest:</label>
+            <input type="number" id="oldpeak" name="oldpeak" step="0.1" required>
+        </div>
+        <div class="form-group">
+            <label for="slope">Slope of the Peak Exercise ST Segment (1-3):</label>
+            <input type="number" id="slope" name="slope" required>
+        </div>
+        <div class="form-group">
+            <label for="ca">Number of Major Vessels Colored by Fluoroscopy (0-3):</label>
+            <input type="number" id="ca" name="ca" required>
+        </div>
+        <div class="form-group">
+            <label for="thal">Thalassemia (3 = Normal, 6 = Fixed Defect, 7 = Reversible Defect):</label>
+            <input type="number" id="thal" name="thal" required>
+        </div>
+        <button type="submit">Predict</button>
+    </form>
+
+    <!-- The prediction result will be displayed on the response page or via redirect -->
+    <div id="prediction-result"></div>
+</div>
+{% endblock %}
