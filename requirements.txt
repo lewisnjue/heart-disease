@@ -11,3 +11,4 @@ uvicorn
 pydantic 
 jinja2 
 pydantic-settings 
+python-multipart
